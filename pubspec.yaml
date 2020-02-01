@@ -76,4 +76,4 @@ flutter:
           weight: 600
     - family: Avenir
       fonts:
-        - asset: assets/fonts/Avenir.ttc
+        - asset: assets/fonts/avenir.otf
