@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
+import 'package:project_julia_ai/login_widget/login_widget.dart';
+import 'package:project_julia_ai/sign_up_widget/sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
 class WelcomeWidget extends StatelessWidget {
@@ -100,7 +102,7 @@ class WelcomeWidget extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                print("Log In!");
+                print('LogIn');
               },
             ),
           ),
@@ -121,7 +123,7 @@ class WelcomeWidget extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              print("Sign Up!");
+              print('Signup');
             },
           ),
           Container(
@@ -146,24 +148,26 @@ class WelcomeWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  width: 40,
-                  height: 40,
-                  child: Image.asset(
+                IconButton(
+                  icon: Image.asset(
                     "assets/images/-icon-facebook.png",
                     fit: BoxFit.none,
                   ),
+                  onPressed: () {
+                    print("Facebook");
+                  },
                 ),
                 Container(
                   width: 25.0,
                 ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  child: Image.asset(
+                IconButton(
+                  icon: Image.asset(
                     "assets/images/-icon-google.png",
                     fit: BoxFit.none,
                   ),
+                  onPressed: () {
+                    print("Google");
+                  },
                 ),
               ],
             ),
