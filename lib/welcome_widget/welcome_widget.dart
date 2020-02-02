@@ -36,7 +36,12 @@ class WelcomeWidget extends StatelessWidget {
             height: 120.0,
           ),
           Container(
-            padding: EdgeInsets.all(5.0),
+            padding: EdgeInsets.only(
+              top: 30.0,
+              left: 5.0,
+              right: 5.0,
+              bottom: 5.0,
+            ),
             child: Text(
               "Be with you \nfor great trip",
               textAlign: TextAlign.left,

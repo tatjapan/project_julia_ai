@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_julia_ai/values/colors.dart';
 import 'package:project_julia_ai/values/gradients.dart';
-import 'package:project_julia_ai/values/radii.dart';
 
 class CustomGradientButton extends StatelessWidget {
   CustomGradientButton({
@@ -15,19 +13,25 @@ class CustomGradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
       height: 45.0,
-      decoration: BoxDecoration(
-        gradient: Gradients.primaryGradient,
-        borderRadius: BorderRadius.all(
-          Radius.circular(25.0),
+      child: RaisedButton(
+        onPressed: onPressed,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(25.0),
+          ),
         ),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          child: Center(
+        padding: EdgeInsets.all(0.0),
+        child: Ink(
+          decoration: BoxDecoration(
+            gradient: Gradients.primaryGradient,
+            borderRadius: BorderRadius.all(
+              Radius.circular(25.0),
+            ),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            alignment: Alignment.center,
             child: child,
           ),
         ),
