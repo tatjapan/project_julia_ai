@@ -73,13 +73,13 @@ class SignUpWidget extends StatelessWidget {
             height: 40.0,
           ),
           CustomTextField(
-            hinttext: "Username",
+            hintText: "Username",
           ),
           CustomTextField(
-            hinttext: "Email",
+            hintText: "Email",
           ),
           CustomTextField(
-            hinttext: "Password",
+            hintText: "Password",
           ),
           SizedBox(
             height: 10.0,
@@ -88,13 +88,13 @@ class SignUpWidget extends StatelessWidget {
             padding: EdgeInsets.all(30.0),
             width: 275.0,
             child: Text(
-              "By clicking Sign up you agree to the following Terms and Conditions without reservation ",
-              textAlign: TextAlign.left,
+              "By clicking Sign up you agree to the following Terms and Conditions without reservation. ",
+              textAlign: TextAlign.justify,
               style: TextStyle(
                 color: AppColors.primaryText,
                 fontFamily: "Avenir",
                 fontWeight: FontWeight.w300,
-                fontSize: 17,
+                fontSize: 18,
                 letterSpacing: -0.41,
                 height: 1.29412,
               ),

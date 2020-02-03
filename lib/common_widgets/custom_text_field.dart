@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:project_julia_ai/values/values.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({this.hinttext});
+  CustomTextField({this.hintText});
 
-  final String hinttext;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
       child: Container(
         width: 315,
         height: 45,
-        margin: EdgeInsets.all(10.0),
+        margin: EdgeInsets.only(
+          top: 10.0,
+          bottom: 10.0,
+        ),
         decoration: BoxDecoration(
           color: Color.fromARGB(51, 255, 255, 255),
           borderRadius: Radii.k22pxRadius,
@@ -21,7 +23,7 @@ class CustomTextField extends StatelessWidget {
         child: TextFormField(
           textAlign: TextAlign.left,
           decoration: InputDecoration(
-            hintText: hinttext,
+            hintText: hintText,
             contentPadding: EdgeInsets.only(
               left: 20.0,
               right: 20.0,
