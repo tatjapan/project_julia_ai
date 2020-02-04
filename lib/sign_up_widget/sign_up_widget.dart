@@ -61,8 +61,8 @@ class SignUpWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w900,
+                fontFamily: "Avenir_heavy",
+                fontWeight: FontWeight.w400,
                 fontSize: 34,
                 letterSpacing: 0.60714,
                 height: 1.17647,

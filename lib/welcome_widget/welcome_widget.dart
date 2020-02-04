@@ -28,24 +28,22 @@ class WelcomeWidget extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SizedBox(
-            height: 120.0,
+            height: 150.0,
           ),
           Container(
             padding: EdgeInsets.only(
               top: 30.0,
-              left: 5.0,
-              right: 5.0,
               bottom: 5.0,
             ),
             child: Text(
-              "Be with you \nfor great trip",
+              "We'll be with you for a great trip",
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: AppColors.primaryText,
@@ -63,8 +61,7 @@ class WelcomeWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(5.0),
             child: Text(
-              "Forget about guidebooks and travel review sites with generic outdated information."
-              " \nAnytime you can connect with ideal local AI girls  no matter where you are.",
+              "You can connect with imaginary local AI girls no matter where you are.",
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: AppColors.primaryText,

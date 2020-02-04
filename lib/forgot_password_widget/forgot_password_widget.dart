@@ -1,150 +1,120 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
+import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-
 class ForgotPasswordWidget extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-  
-    return Scaffold(
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255),
+    return Stack(
+      children: <Widget>[
+        Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background-forgotpw.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            Positioned(
-              left: 0,
-              right: 0,
-              child: Image.asset(
-                "assets/images/background-2.png",
-                fit: BoxFit.cover,
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            leading: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  icon: Image.asset(
+                    "assets/images/-icon-close.png",
+                    fit: BoxFit.none,
+                  ),
+                  onPressed: () {
+                    print("Back to Login page");
+                  },
+                )
+              ],
+            ),
+          ),
+          body: _buildContent(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContent() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          SizedBox(
+            height: 20.0,
+          ),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              "Forgot your password?",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontFamily: "Avenir",
+                fontWeight: FontWeight.w900,
+                fontSize: 34,
+                letterSpacing: -2.0,
+                height: 1.17647,
               ),
             ),
-            Positioned(
-              left: 15,
-              top: 52,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      width: 16,
-                      height: 16,
-                      child: Image.asset(
-                        "assets/images/-icon-close.png",
-                        fit: BoxFit.none,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      margin: EdgeInsets.only(left: 15, top: 58),
-                      child: Text(
-                        "Forgot password",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: AppColors.primaryText,
-                          fontFamily: "Avenir",
-                          fontWeight: FontWeight.w900,
-                          fontSize: 34,
-                          letterSpacing: 0.60714,
-                          height: 1.17647,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      width: 301,
-                      margin: EdgeInsets.only(left: 15, top: 11),
-                      child: Text(
-                        "Please enter your email address. You will receive a link to create a new password via email.",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: AppColors.primaryText,
-                          fontFamily: "Avenir",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                          letterSpacing: -0.41,
-                          height: 1.29412,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      width: 315,
-                      height: 44,
-                      margin: EdgeInsets.only(top: 39),
-                      decoration: BoxDecoration(
-                        color: AppColors.accentElement,
-                        borderRadius: Radii.k22pxRadius,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Text(
-                              "Your email",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: AppColors.primaryText,
-                                fontFamily: "Avenir",
-                                fontWeight: FontWeight.w400,
-                                fontSize: 17,
-                                letterSpacing: -0.41,
-                                height: 1.29412,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      width: 315,
-                      height: 44,
-                      margin: EdgeInsets.only(top: 45),
-                      decoration: BoxDecoration(
-                        gradient: Gradients.primaryGradient,
-                        borderRadius: Radii.k22pxRadius,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Send password reset email",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: AppColors.primaryText,
-                              fontFamily: "Avenir",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                              letterSpacing: -0.36176,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+          ),
+          SizedBox(
+            height: 35.0,
+          ),
+          Container(
+            padding: EdgeInsets.only(
+              left: 10.0,
+              right: 10.0,
+            ),
+            child: Text(
+              "Please enter your email address. You will receive a link to create a new password via email.",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontFamily: "Avenir",
+                fontWeight: FontWeight.w400,
+                fontSize: 18,
+                letterSpacing: -0.41,
+                height: 1.29412,
               ),
             ),
-          ],
-        ),
+          ),
+          CustomTextField(
+            hintText: "Your email",
+          ),
+          SizedBox(
+            height: 25.0,
+          ),
+          CustomGradientButton(
+            child: Text(
+              "Send password reset email",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontFamily: "Avenir",
+                fontWeight: FontWeight.w600,
+                fontSize: 16.5,
+                letterSpacing: -0.24,
+                height: 1.33333,
+              ),
+            ),
+            onPressed: () {
+              print('Reset');
+            },
+          ),
+        ],
       ),
     );
   }
