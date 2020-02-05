@@ -1,13 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-
 class IllustrationGuide4Widget extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
@@ -97,7 +93,8 @@ class IllustrationGuide4Widget extends StatelessWidget {
                               height: 188,
                               decoration: BoxDecoration(
                                 color: AppColors.primaryBackground,
-                                borderRadius: BorderRadius.all(Radius.circular(94)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(94)),
                               ),
                               child: Container(),
                             ),
@@ -106,7 +103,7 @@ class IllustrationGuide4Widget extends StatelessWidget {
                             left: 0,
                             right: 0,
                             child: Image.asset(
-                              "assets/images/undraw-having-fun-iais.png",
+                              "assets/images/slider_image4.png",
                               fit: BoxFit.cover,
                             ),
                           ),

@@ -1,13 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-
 class IllustrationGuide2Widget extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
@@ -86,7 +82,7 @@ class IllustrationGuide2Widget extends StatelessWidget {
                       left: 5,
                       right: 5,
                       child: Image.asset(
-                        "assets/images/undraw-ask-me-anything-k8o0.png",
+                        "assets/images/slider_image2.png",
                         fit: BoxFit.cover,
                       ),
                     ),
