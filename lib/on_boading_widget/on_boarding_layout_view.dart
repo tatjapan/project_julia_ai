@@ -46,7 +46,7 @@ class _OnBoardingLayoutViewState extends State<OnBoardingLayoutView> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.17),
+                  top: MediaQuery.of(context).size.height * 0.12),
               child: PageView.builder(
                 scrollDirection: Axis.horizontal,
                 controller: _pageController,

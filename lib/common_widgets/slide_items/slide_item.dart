@@ -16,42 +16,43 @@ class SlideItem extends StatelessWidget {
           SizedBox(
             height: 10.0,
           ),
-          Stack(
-            children: <Widget>[
-              Positioned(
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 218,
-                  height: 218,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(51, 0, 0, 0),
-                    borderRadius: BorderRadius.all(Radius.circular(109)),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              width: 218,
+              height: 218,
+              margin: EdgeInsets.only(top: 20.0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(51, 0, 0, 0),
+                borderRadius: BorderRadius.all(Radius.circular(109)),
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    left: 15,
+                    right: 15,
+                    child: Container(
+                      height: 188,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(51, 0, 0, 0),
+                        borderRadius: BorderRadius.all(Radius.circular(94)),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Positioned(
-                left: 15,
-                right: 15,
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 188,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(51, 0, 0, 0),
-                    borderRadius: BorderRadius.all(Radius.circular(94)),
+                  Positioned(
+                    left: 5,
+                    right: 5,
+                    child: Image.asset(
+                      sliderArrayList[index].sliderImageUrl,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  child: Container(),
-                ),
+                ],
               ),
-              Positioned(
-                left: 14,
-                right: 14,
-                child: Image.asset(
-                  sliderArrayList[index].sliderImageUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
+            ),
           ),
+//
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
@@ -74,7 +75,7 @@ class SlideItem extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(10.0),
               child: Text(
                 sliderArrayList[index].sliderSubHeading,
                 textAlign: TextAlign.center,
