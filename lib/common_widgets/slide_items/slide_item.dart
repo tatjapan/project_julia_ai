@@ -18,19 +18,22 @@ class SlideItem extends StatelessWidget {
           ),
           Stack(
             children: <Widget>[
-              Container(
-                width: 218,
-                height: 218,
-                margin: EdgeInsets.only(top: 115),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(51, 0, 0, 0),
-                  borderRadius: BorderRadius.all(Radius.circular(109)),
+              Positioned(
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 218,
+                  height: 218,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(51, 0, 0, 0),
+                    borderRadius: BorderRadius.all(Radius.circular(109)),
+                  ),
                 ),
               ),
               Positioned(
                 left: 15,
                 right: 15,
                 child: Container(
+                  alignment: Alignment.center,
                   height: 188,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(51, 0, 0, 0),
@@ -57,6 +60,7 @@ class SlideItem extends StatelessWidget {
               padding: EdgeInsets.all(20.0),
               child: Text(
                 sliderArrayList[index].sliderHeading,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.primaryText,
                   fontFamily: "Avenir",
@@ -69,16 +73,19 @@ class SlideItem extends StatelessWidget {
             ),
           ),
           Center(
-            child: Text(
-              sliderArrayList[index].sliderSubHeading,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w400,
-                fontSize: 17,
-                letterSpacing: -0.41,
-                height: 1.29412,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                sliderArrayList[index].sliderSubHeading,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primaryText,
+                  fontFamily: "Avenir",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17,
+                  letterSpacing: -0.41,
+                  height: 1.29412,
+                ),
               ),
             ),
           ),

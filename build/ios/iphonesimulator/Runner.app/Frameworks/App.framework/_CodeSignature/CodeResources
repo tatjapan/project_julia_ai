@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		cAkpNDa6NL7FZtXx5Bw6HYgb4S8=
+		Up7XgvkEr9GeW+ercubduJtXnpE=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -60,10 +60,6 @@
 		<data>
 		Pl2sdwwxJ8ZvmzyV3v0PqC06aj4=
 		</data>
-		<key>flutter_assets/assets/images/2.0x/container.png</key>
-		<data>
-		P+4rViZnpEB1LoqDBfQAu7swBH4=
-		</data>
 		<key>flutter_assets/assets/images/2.0x/slider-2.png</key>
 		<data>
 		WIsVZ9L9bxuQWwIFp5uQEli10aw=
@@ -79,22 +75,6 @@
 		<key>flutter_assets/assets/images/2.0x/slider.png</key>
 		<data>
 		Nvk5Xli+freEZTRK5crcKR7zkmE=
-		</data>
-		<key>flutter_assets/assets/images/2.0x/undraw-adventure-4hum.png</key>
-		<data>
-		3kD6Fk/oDo5wzAUdkXKz7R7NnH8=
-		</data>
-		<key>flutter_assets/assets/images/2.0x/undraw-ask-me-anything-k8o0.png</key>
-		<data>
-		/1qrf6l/LvMKHVVMfeBzaGpN/M4=
-		</data>
-		<key>flutter_assets/assets/images/2.0x/undraw-destinations-fpv7.png</key>
-		<data>
-		fgYuEdWfOe1Mr4LfwZeM3b6vy2Q=
-		</data>
-		<key>flutter_assets/assets/images/2.0x/undraw-having-fun-iais.png</key>
-		<data>
-		FVYvlDMf2aOvtqrAY7xToe+B7Ho=
 		</data>
 		<key>flutter_assets/assets/images/3.0x/-icon-back.png</key>
 		<data>
@@ -112,10 +92,6 @@
 		<data>
 		THKp1nYEsmbXgP/wRsCKwn7zgq0=
 		</data>
-		<key>flutter_assets/assets/images/3.0x/container.png</key>
-		<data>
-		Ro3lbeXKiGfS+qsKMHSHMDa3F0o=
-		</data>
 		<key>flutter_assets/assets/images/3.0x/slider-2.png</key>
 		<data>
 		c27BUahhK5huT1+0MRBuoWEic+c=
@@ -131,22 +107,6 @@
 		<key>flutter_assets/assets/images/3.0x/slider.png</key>
 		<data>
 		u2veCxz8KzYTWMec2of5973/WPc=
-		</data>
-		<key>flutter_assets/assets/images/3.0x/undraw-adventure-4hum.png</key>
-		<data>
-		q5m8uBohh8R1HxoAB+ZFUjwdzDQ=
-		</data>
-		<key>flutter_assets/assets/images/3.0x/undraw-ask-me-anything-k8o0.png</key>
-		<data>
-		79BrPrqE9yxsKHwjAW4SSTohEdo=
-		</data>
-		<key>flutter_assets/assets/images/3.0x/undraw-destinations-fpv7.png</key>
-		<data>
-		77pxUVM17LNuzTaoUtv1yUfwTAg=
-		</data>
-		<key>flutter_assets/assets/images/3.0x/undraw-having-fun-iais.png</key>
-		<data>
-		W/xQWYaqW2GyRWjknF98ojance8=
 		</data>
 		<key>flutter_assets/assets/images/background-forgotpw.png</key>
 		<data>
@@ -164,10 +124,6 @@
 		<data>
 		kIZgbAd0NVXjse2+UQqYBGWbZyw=
 		</data>
-		<key>flutter_assets/assets/images/container.png</key>
-		<data>
-		/uVg3l6U/dLbGxSp9V7jQpIocRw=
-		</data>
 		<key>flutter_assets/assets/images/slider-2.png</key>
 		<data>
 		0dhDupwdIHqd9nY9OE2S5YBmhK4=
@@ -184,19 +140,19 @@
 		<data>
 		ZtLMW6+ROGToPFI/wzgd39qUzTw=
 		</data>
-		<key>flutter_assets/assets/images/undraw-adventure-4hum.png</key>
+		<key>flutter_assets/assets/images/slider_image1.png</key>
 		<data>
 		kOyOuULtTKE1HlSgwRgXs1HL74c=
 		</data>
-		<key>flutter_assets/assets/images/undraw-ask-me-anything-k8o0.png</key>
+		<key>flutter_assets/assets/images/slider_image2.png</key>
 		<data>
 		J30yzmh+ns0XOKilHyEhZmegZdA=
 		</data>
-		<key>flutter_assets/assets/images/undraw-destinations-fpv7.png</key>
+		<key>flutter_assets/assets/images/slider_image3.png</key>
 		<data>
 		KfK0jA2gLyUXeRInMnX/HlaI5qo=
 		</data>
-		<key>flutter_assets/assets/images/undraw-having-fun-iais.png</key>
+		<key>flutter_assets/assets/images/slider_image4.png</key>
 		<data>
 		DfWml1MutjHRDQXvj2GbT7Motyw=
 		</data>
@@ -210,7 +166,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		wv06hmTcFDWh3IU9rxN3yzWc7+M=
+		V4g+qgXPhHH/6s+/YUf7gAM4kHc=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -227,11 +183,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cAkpNDa6NL7FZtXx5Bw6HYgb4S8=
+			Up7XgvkEr9GeW+ercubduJtXnpE=
 			</data>
 			<key>hash2</key>
 			<data>
-			bY5TiztG0SK3IFmtyo+NE0mTdhIZ9FEVk26Nwph3La0=
+			26zi4gjf0y0gC0kgQZP6X1vYAhBRAkNbGC6eJjZNtdM=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -366,17 +322,6 @@
 			ryXtpQtw51C2Cs51rV83iSBCTqMUSn4dAItZxQ8hZhw=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/images/2.0x/container.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			P+4rViZnpEB1LoqDBfQAu7swBH4=
-			</data>
-			<key>hash2</key>
-			<data>
-			eyZDU4ZGoTzxWQDc9ot0VLZi8B4JGcZZG1iNLE0KZM0=
-			</data>
-		</dict>
 		<key>flutter_assets/assets/images/2.0x/slider-2.png</key>
 		<dict>
 			<key>hash</key>
@@ -419,50 +364,6 @@
 			<key>hash2</key>
 			<data>
 			FWgfG19h/nCw56bQqD3HfdWL4cES1b6Ud0ZRdzOubV8=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/2.0x/undraw-adventure-4hum.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			3kD6Fk/oDo5wzAUdkXKz7R7NnH8=
-			</data>
-			<key>hash2</key>
-			<data>
-			VXc0b3CK1V9GGOZLHBvhrTuhCKXK7jRxGSr5tm59HOU=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/2.0x/undraw-ask-me-anything-k8o0.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/1qrf6l/LvMKHVVMfeBzaGpN/M4=
-			</data>
-			<key>hash2</key>
-			<data>
-			kzasPxU7ejA8xACY0imNSfKaALy4sfbezluM8xC3oyU=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/2.0x/undraw-destinations-fpv7.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			fgYuEdWfOe1Mr4LfwZeM3b6vy2Q=
-			</data>
-			<key>hash2</key>
-			<data>
-			wfNyouoVu/rvGMvCJoxYgbdAjrG3lfdZjfW/oQcGldg=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/2.0x/undraw-having-fun-iais.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			FVYvlDMf2aOvtqrAY7xToe+B7Ho=
-			</data>
-			<key>hash2</key>
-			<data>
-			KDz4txkKRJfigyuR8vh6+xAW6JoNHFa3dRtxDSldKGk=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/3.0x/-icon-back.png</key>
@@ -509,17 +410,6 @@
 			K3UyHf+N+B6M0TzzQOnyHXjtOfg5dgBAWmZ2hXbCds8=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/images/3.0x/container.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Ro3lbeXKiGfS+qsKMHSHMDa3F0o=
-			</data>
-			<key>hash2</key>
-			<data>
-			4C5jaZsN4J3R02zZevkyhukELdnNlRMEzLEMH35AQZI=
-			</data>
-		</dict>
 		<key>flutter_assets/assets/images/3.0x/slider-2.png</key>
 		<dict>
 			<key>hash</key>
@@ -562,50 +452,6 @@
 			<key>hash2</key>
 			<data>
 			WVs3IcdzHgW/Ael1y9B26aNeW9jNV52NSsWTrHXv/y4=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/3.0x/undraw-adventure-4hum.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			q5m8uBohh8R1HxoAB+ZFUjwdzDQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			4yNmDNr2zFn6n0HTBMQd5Fns8MI+2DgScysxfXCkZJE=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/3.0x/undraw-ask-me-anything-k8o0.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			79BrPrqE9yxsKHwjAW4SSTohEdo=
-			</data>
-			<key>hash2</key>
-			<data>
-			MPlwZwKSaiurUkEgfe7EiNsT7ZQcfdW4rE1yoq5Jp+A=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/3.0x/undraw-destinations-fpv7.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			77pxUVM17LNuzTaoUtv1yUfwTAg=
-			</data>
-			<key>hash2</key>
-			<data>
-			Sn9MKieKvj65tx62n/lgKzdQCvR4WkYxLuuwOQZFLWM=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/images/3.0x/undraw-having-fun-iais.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			W/xQWYaqW2GyRWjknF98ojance8=
-			</data>
-			<key>hash2</key>
-			<data>
-			R0j27+lJxEN4dMTeeZuNiNotByEa0y73UwSiqvWLixY=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/background-forgotpw.png</key>
@@ -652,17 +498,6 @@
 			q+B3usF0u2/dwaxvLqSwuOQZsUr796E2lmvl8lQqRCw=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/images/container.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/uVg3l6U/dLbGxSp9V7jQpIocRw=
-			</data>
-			<key>hash2</key>
-			<data>
-			xeoCq8V5DcO2ivRObaw2bozvG1ZPao2ZkRYahmAc3MA=
-			</data>
-		</dict>
 		<key>flutter_assets/assets/images/slider-2.png</key>
 		<dict>
 			<key>hash</key>
@@ -707,7 +542,7 @@
 			VwG4ShiOxFWZDgypRLWilrBH9a93MGlCdeJW1DM9YFA=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/images/undraw-adventure-4hum.png</key>
+		<key>flutter_assets/assets/images/slider_image1.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -718,7 +553,7 @@
 			SUvM/MFuOrA8yWTMe1gjt7GxXBcju7HlmdjUw36T0pk=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/images/undraw-ask-me-anything-k8o0.png</key>
+		<key>flutter_assets/assets/images/slider_image2.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -729,7 +564,7 @@
 			rsRrHStEd9d5emsJ+U1OS9foffCwR7KzhE9W622MD/c=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/images/undraw-destinations-fpv7.png</key>
+		<key>flutter_assets/assets/images/slider_image3.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -740,7 +575,7 @@
 			edi57mjS3f3NbevjwR08KmskJbEyAOVlrygwdB2ws2k=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/images/undraw-having-fun-iais.png</key>
+		<key>flutter_assets/assets/images/slider_image4.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -777,11 +612,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wv06hmTcFDWh3IU9rxN3yzWc7+M=
+			V4g+qgXPhHH/6s+/YUf7gAM4kHc=
 			</data>
 			<key>hash2</key>
 			<data>
-			XC7RJsstd8txx3S1HKk8oCFKyX80MkwLz/yuVoSi9Yo=
+			8wf3LjBy184fE4o92mxFadrnnRFnXvRvSx5gkHdYYnA=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
