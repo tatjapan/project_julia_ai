@@ -1,4 +1,4 @@
-#Mon Feb 03 21:14:02 JST 2020
+#Sun Feb 09 17:32:55 JST 2020
 base.0=/Users/tatsuya-tsuri/Desktop/Code/project_julia_ai/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex
