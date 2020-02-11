@@ -23,7 +23,6 @@ class ForgotPasswordWidget extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: CustomSignInAppBar(
-            height: 75.0,
             icon: Image.asset(
               "assets/images/-icon-close.png",
               fit: BoxFit.none,

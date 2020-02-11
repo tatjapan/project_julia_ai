@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_app_bar.dart';
 import 'package:project_julia_ai/values/values.dart';
+import 'package:project_julia_ai/values/my_flutter_app_icons.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -36,7 +37,6 @@ class _HomeState extends State<Home> {
       key: _scaffoldKey,
       backgroundColor: AppColors.secondaryBackground,
       appBar: CustomAppBar(
-        height: 75.0,
         icon: Icon(Icons.settings),
         onPressed: () {
           print("Setting page!");
@@ -54,19 +54,19 @@ class _HomeState extends State<Home> {
         iconSize: 30.0,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(MyFlutterApp.newhome),
             title: Text("Home"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
+            icon: Icon(MyFlutterApp.message),
             title: Text("Messages"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none),
+            icon: Icon(MyFlutterApp.bell),
             title: Text("Notifications"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(MyFlutterApp.profiles),
             title: Text("Profiles"),
           ),
         ],

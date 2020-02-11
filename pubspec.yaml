@@ -77,7 +77,7 @@ flutter:
     - family: Avenir
       fonts:
         - asset: assets/fonts/avenir.otf
-#    - family: Avenir
-#      fonts:
-#        - asset: assets/fonts/Avenir_heavy.ttf
+    - family: MyFlutterApp
+      fonts:
+        - asset: assets/fonts/MyFlutterApp.ttf
 

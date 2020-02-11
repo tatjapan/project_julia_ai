@@ -6,7 +6,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key key,
     this.icon,
     this.onPressed,
-    @required this.height,
+    this.height: 75.0,
   }) : super(key: key);
 
   final double height;
