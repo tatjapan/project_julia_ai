@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_julia_ai/common_widgets/custom_app_bar.dart';
 import 'package:project_julia_ai/values/values.dart';
 
 class Home extends StatefulWidget {
@@ -34,15 +35,12 @@ class _HomeState extends State<Home> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: AppColors.secondaryBackground,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {},
-          ),
-        ],
+      appBar: CustomAppBar(
+        height: 75.0,
+        icon: Icon(Icons.settings),
+        onPressed: () {
+          print("Setting page!");
+        },
       ),
       body: SingleChildScrollView(
         controller: pageController,
@@ -53,7 +51,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: pageIndex,
         backgroundColor: AppColors.primaryBackground,
-        activeColor: Theme.of(context).primaryColor,
+        iconSize: 30.0,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

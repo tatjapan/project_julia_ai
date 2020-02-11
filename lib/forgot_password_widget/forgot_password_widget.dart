@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
+import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/values/values.dart';
 
@@ -21,23 +22,15 @@ class ForgotPasswordWidget extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            leading: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                  icon: Image.asset(
-                    "assets/images/-icon-close.png",
-                    fit: BoxFit.none,
-                  ),
-                  onPressed: () {
-                    print("Back to Login page");
-                  },
-                )
-              ],
+          appBar: CustomSignInAppBar(
+            height: 75.0,
+            icon: Image.asset(
+              "assets/images/-icon-close.png",
+              fit: BoxFit.none,
             ),
+            onPressed: () {
+              print("Back to Login page");
+            },
           ),
           body: _buildContent(),
         ),
@@ -52,9 +45,6 @@ class ForgotPasswordWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          SizedBox(
-            height: 20.0,
-          ),
           Container(
             padding: EdgeInsets.all(10.0),
             child: Text(

@@ -24,6 +24,9 @@ class CustomTextField extends StatelessWidget {
           textAlign: TextAlign.left,
           decoration: InputDecoration(
             hintText: hintText,
+            hintStyle: TextStyle(
+              color: AppColors.primaryText,
+            ),
             contentPadding: EdgeInsets.only(
               left: 20.0,
               right: 20.0,
