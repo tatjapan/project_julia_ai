@@ -4,6 +4,8 @@ import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/values/values.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

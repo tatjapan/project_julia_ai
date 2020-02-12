@@ -4,6 +4,8 @@ import 'package:project_julia_ai/login_widget/login_widget.dart';
 import 'package:project_julia_ai/sign_up_widget/sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 class WelcomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
