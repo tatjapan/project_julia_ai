@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/login_widget/login_widget.dart';
+import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/sign_up_widget/sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-
 class WelcomeWidget extends StatelessWidget {
+  WelcomeWidget({@required this.auth});
+  final AuthBase auth;
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      await auth.signInWithGoogle();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -82,28 +92,27 @@ class WelcomeWidget extends StatelessWidget {
             padding: EdgeInsets.all(10.0),
             height: 45.0,
             child: RaisedButton(
-              color: AppColors.secondaryElement,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(25.0),
+                color: AppColors.secondaryElement,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(25.0),
+                  ),
                 ),
-              ),
-              child: Text(
-                "Log In",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.accentText,
-                  fontFamily: "Avenir",
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16.5,
-                  letterSpacing: -0.24,
-                  height: 1.33333,
+                child: Text(
+                  "Log In",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.accentText,
+                    fontFamily: "Avenir",
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.5,
+                    letterSpacing: -0.24,
+                    height: 1.33333,
+                  ),
                 ),
-              ),
-              onPressed: () {
-                print('LogIn');
-              },
-            ),
+                onPressed: () {
+                  print("Log In");
+                }),
           ),
           SizedBox(
             height: 10.0,
@@ -164,9 +173,7 @@ class WelcomeWidget extends StatelessWidget {
                     "assets/images/-icon-google.png",
                     fit: BoxFit.none,
                   ),
-                  onPressed: () {
-                    print("Google");
-                  },
+                  onPressed: _signInWithGoogle,
                 ),
               ],
             ),
