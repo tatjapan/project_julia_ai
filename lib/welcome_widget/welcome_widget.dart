@@ -17,6 +17,32 @@ class WelcomeWidget extends StatelessWidget {
     }
   }
 
+  Future<void> _signInWithFacebook() async {
+    try {
+      await auth.signInWithFacebook();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void _signUpWithEmail(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => SignUpWidget(),
+      ),
+    );
+  }
+
+  void _logInWithEmail(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => LoginWidget(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -33,13 +59,13 @@ class WelcomeWidget extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          body: _buildContent(),
+          body: _buildContent(context),
         ),
       ],
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -92,27 +118,26 @@ class WelcomeWidget extends StatelessWidget {
             padding: EdgeInsets.all(10.0),
             height: 45.0,
             child: RaisedButton(
-                color: AppColors.secondaryElement,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(25.0),
-                  ),
+              color: AppColors.secondaryElement,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(25.0),
                 ),
-                child: Text(
-                  "Log In",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.accentText,
-                    fontFamily: "Avenir",
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.5,
-                    letterSpacing: -0.24,
-                    height: 1.33333,
-                  ),
+              ),
+              child: Text(
+                "Log In",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.accentText,
+                  fontFamily: "Avenir",
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16.5,
+                  letterSpacing: -0.24,
+                  height: 1.33333,
                 ),
-                onPressed: () {
-                  print("Log In");
-                }),
+              ),
+              onPressed: () => _logInWithEmail(context),
+            ),
           ),
           SizedBox(
             height: 10.0,
@@ -130,9 +155,7 @@ class WelcomeWidget extends StatelessWidget {
                 height: 1.33333,
               ),
             ),
-            onPressed: () {
-              print('Signup');
-            },
+            onPressed: () => _signUpWithEmail(context),
           ),
           Container(
             padding: EdgeInsets.only(
@@ -161,9 +184,7 @@ class WelcomeWidget extends StatelessWidget {
                     "assets/images/-icon-facebook.png",
                     fit: BoxFit.none,
                   ),
-                  onPressed: () {
-                    print("Facebook");
-                  },
+                  onPressed: _signInWithFacebook,
                 ),
                 Container(
                   width: 25.0,
