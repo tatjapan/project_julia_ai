@@ -29,9 +29,7 @@ class ForgotPasswordWidget extends StatelessWidget {
               "assets/images/-icon-close.png",
               fit: BoxFit.none,
             ),
-            onPressed: () {
-              print("Back to Login page");
-            },
+            onPressed: () => Navigator.of(context).pop(),
           ),
           body: _buildContent(),
         ),

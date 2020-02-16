@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:project_julia_ai/values/values.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({this.hintText});
+  CustomTextField({
+    this.hintText,
+    this.obscureText: false,
+    this.controller,
+  });
 
   final String hintText;
+  final bool obscureText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,9 @@ class CustomTextField extends StatelessWidget {
           borderRadius: Radii.k22pxRadius,
         ),
         child: TextFormField(
+          controller: controller,
           textAlign: TextAlign.left,
+          obscureText: obscureText,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(

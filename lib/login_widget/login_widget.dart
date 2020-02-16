@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
+import 'package:project_julia_ai/forgot_password_widget/forgot_password_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,17 +29,24 @@ class LoginWidget extends StatelessWidget {
               "assets/images/-icon-back.png",
               fit: BoxFit.none,
             ),
-            onPressed: () {
-              print("Back to Welcome page");
-            },
+            onPressed: () => Navigator.of(context).pop(),
           ),
-          body: _buildContent(),
+          body: _buildContent(context),
         ),
       ],
     );
   }
 
-  Widget _buildContent() {
+  void _forgotYourPassWord(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => ForgotPasswordWidget(),
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -111,9 +119,7 @@ class LoginWidget extends StatelessWidget {
             height: 40.0,
           ),
           FlatButton(
-            onPressed: () {
-              print("Forgot your Password?");
-            },
+            onPressed: () => _forgotYourPassWord(context),
             child: Text(
               "Forgot your password?",
               textAlign: TextAlign.center,

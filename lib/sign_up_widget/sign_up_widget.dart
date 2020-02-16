@@ -6,7 +6,22 @@ import 'package:project_julia_ai/values/values.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUpWidget extends StatelessWidget {
+class SignUpWidget extends StatefulWidget {
+  @override
+  _SignUpWidgetState createState() => _SignUpWidgetState();
+}
+
+class _SignUpWidgetState extends State<SignUpWidget> {
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _submit() {
+    // TODO: print email and password
+    print(
+        "username: ${_userNameController.text}, email: ${_emailController.text}, password: ${_passwordController.text}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -28,9 +43,7 @@ class SignUpWidget extends StatelessWidget {
               "assets/images/-icon-back.png",
               fit: BoxFit.none,
             ),
-            onPressed: () {
-              print("Back to Welcome page");
-            },
+            onPressed: () => Navigator.of(context).pop(),
           ),
           body: _buildContent(),
         ),
@@ -64,13 +77,17 @@ class SignUpWidget extends StatelessWidget {
             height: 40.0,
           ),
           CustomTextField(
+            controller: _userNameController,
             hintText: "Username",
           ),
           CustomTextField(
+            controller: _emailController,
             hintText: "Email",
           ),
           CustomTextField(
+            controller: _passwordController,
             hintText: "Password",
+            obscureText: true,
           ),
           SizedBox(
             height: 10.0,
@@ -104,9 +121,7 @@ class SignUpWidget extends StatelessWidget {
                 height: 1.33333,
               ),
             ),
-            onPressed: () {
-              print('Signup');
-            },
+            onPressed: _submit,
           ),
         ],
       ),
