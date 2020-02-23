@@ -2,24 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
+import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-
 class SignUpWidget extends StatefulWidget {
+  SignUpWidget({@required this.auth});
+  final AuthBase auth;
   @override
   _SignUpWidgetState createState() => _SignUpWidgetState();
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
-  final TextEditingController _userNameController = TextEditingController();
+//  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _submit() {
-    // TODO: print email and password
-    print(
-        "username: ${_userNameController.text}, email: ${_emailController.text}, password: ${_passwordController.text}");
+  String get _email => _emailController.text;
+  String get _password => _passwordController.text;
+//  String get _username => _userNameController.text;
+
+  void _submit() async {
+    try {
+      await widget.auth.createUserWithEmailAndPassword(_email, _password);
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -77,7 +85,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             height: 40.0,
           ),
           CustomTextField(
-            controller: _userNameController,
+//            controller: _userNameController,
             hintText: "Username",
           ),
           CustomTextField(

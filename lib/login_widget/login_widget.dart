@@ -3,11 +3,33 @@ import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/forgot_password_widget/forgot_password_widget.dart';
+import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+class LoginWidget extends StatefulWidget {
+  LoginWidget({@required this.auth});
+  final AuthBase auth;
 
-class LoginWidget extends StatelessWidget {
+  @override
+  _LoginWidgetState createState() => _LoginWidgetState();
+}
+
+class _LoginWidgetState extends State<LoginWidget> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  String get _email => _emailController.text;
+  String get _password => _passwordController.text;
+
+  void _submit() async {
+    try {
+      await widget.auth.signInWithEmailAndPassword(_email, _password);
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -91,9 +113,12 @@ class LoginWidget extends StatelessWidget {
           ),
           CustomTextField(
             hintText: "Email",
+            controller: _emailController,
           ),
           CustomTextField(
             hintText: "Password",
+            controller: _passwordController,
+            obscureText: true,
           ),
           SizedBox(
             height: 25.0,
@@ -111,9 +136,7 @@ class LoginWidget extends StatelessWidget {
                 height: 1.33333,
               ),
             ),
-            onPressed: () {
-              print('Login');
-            },
+            onPressed: _submit,
           ),
           SizedBox(
             height: 40.0,

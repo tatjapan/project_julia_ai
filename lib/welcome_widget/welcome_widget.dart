@@ -29,7 +29,7 @@ class WelcomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => SignUpWidget(),
+        builder: (context) => SignUpWidget(auth: auth),
       ),
     );
   }
@@ -38,7 +38,7 @@ class WelcomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => LoginWidget(),
+        builder: (context) => LoginWidget(auth: auth),
       ),
     );
   }
