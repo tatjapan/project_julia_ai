@@ -5,7 +5,9 @@ import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-class SignUpWidget extends StatefulWidget {
+import '../validator.dart';
+
+class SignUpWidget extends StatefulWidget with EmailAndPasswordValidators {
   SignUpWidget({@required this.auth});
   final AuthBase auth;
   @override
@@ -16,6 +18,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 //  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
 
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
@@ -28,6 +32,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  void _emailEditingComplete() {
+    FocusScope.of(context).requestFocus(_passwordFocusNode);
   }
 
   @override
@@ -60,6 +68,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   }
 
   Widget _buildContent() {
+    bool submitEnabled = widget.emailValidator.isValid(_email) &&
+        widget.passwordValidator.isValid(_password);
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -91,11 +101,19 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           CustomTextField(
             controller: _emailController,
             hintText: "Email",
+            keyboardType: TextInputType.emailAddress,
+            focusNode: _emailFocusNode,
+            onEditingComplete: _emailEditingComplete,
+            onChanged: (email) => _updateState(),
           ),
           CustomTextField(
             controller: _passwordController,
             hintText: "Password",
             obscureText: true,
+            keyboardType: TextInputType.visiblePassword,
+            focusNode: _passwordFocusNode,
+            onEditingComplete: _submit,
+            onChanged: (password) => _updateState(),
           ),
           SizedBox(
             height: 10.0,
@@ -129,10 +147,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 height: 1.33333,
               ),
             ),
-            onPressed: _submit,
+            onPressed: submitEnabled ? _submit : null,
           ),
         ],
       ),
     );
+  }
+
+  void _updateState() {
+    print('email: $_email, password: $_password');
+    setState(() {});
   }
 }

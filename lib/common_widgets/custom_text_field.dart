@@ -6,11 +6,19 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.obscureText: false,
     this.controller,
+    this.keyboardType,
+    this.focusNode,
+    this.onEditingComplete,
+    this.onChanged,
   });
 
   final String hintText;
   final bool obscureText;
   final TextEditingController controller;
+  final TextInputType keyboardType;
+  final FocusNode focusNode;
+  final VoidCallback onEditingComplete;
+  final ValueChanged onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +57,11 @@ class CustomTextField extends StatelessWidget {
           ),
           maxLines: 1,
           autocorrect: false,
+          keyboardType: keyboardType,
+          focusNode: focusNode,
+          textInputAction: TextInputAction.next,
+          onEditingComplete: onEditingComplete,
+          onChanged: onChanged,
         ),
       ),
     );

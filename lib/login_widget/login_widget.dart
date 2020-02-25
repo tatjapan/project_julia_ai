@@ -6,7 +6,9 @@ import 'package:project_julia_ai/forgot_password_widget/forgot_password_widget.d
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-class LoginWidget extends StatefulWidget {
+import '../validator.dart';
+
+class LoginWidget extends StatefulWidget with EmailAndPasswordValidators {
   LoginWidget({@required this.auth});
   final AuthBase auth;
 
@@ -18,6 +20,9 @@ class _LoginWidgetState extends State<LoginWidget> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
 
@@ -28,6 +33,10 @@ class _LoginWidgetState extends State<LoginWidget> {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  void _emailEditingComplete() {
+    FocusScope.of(context).requestFocus(_passwordFocusNode);
   }
 
   @override
@@ -69,6 +78,8 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 
   Widget _buildContent(BuildContext context) {
+    bool submitEnabled = widget.emailValidator.isValid(_email) &&
+        widget.passwordValidator.isValid(_password);
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -114,11 +125,19 @@ class _LoginWidgetState extends State<LoginWidget> {
           CustomTextField(
             hintText: "Email",
             controller: _emailController,
+            keyboardType: TextInputType.emailAddress,
+            focusNode: _emailFocusNode,
+            onEditingComplete: _emailEditingComplete,
+            onChanged: (email) => _updateState(),
           ),
           CustomTextField(
             hintText: "Password",
             controller: _passwordController,
             obscureText: true,
+            keyboardType: TextInputType.visiblePassword,
+            focusNode: _passwordFocusNode,
+            onEditingComplete: _submit,
+            onChanged: (password) => _updateState(),
           ),
           SizedBox(
             height: 25.0,
@@ -136,7 +155,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 height: 1.33333,
               ),
             ),
-            onPressed: _submit,
+            onPressed: submitEnabled ? _submit : null,
           ),
           SizedBox(
             height: 40.0,
@@ -157,5 +176,10 @@ class _LoginWidgetState extends State<LoginWidget> {
         ],
       ),
     );
+  }
+
+  void _updateState() {
+    print('email: $_email, password: $_password');
+    setState(() {});
   }
 }
