@@ -25,18 +25,31 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
+  bool _submitted = false;
+  bool _isLoading = false;
 
   void _submit() async {
+    setState(() {
+      _submitted = true;
+      _isLoading = true;
+    });
     try {
       await widget.auth.signInWithEmailAndPassword(_email, _password);
       Navigator.of(context).pop();
     } catch (e) {
       print(e.toString());
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   void _emailEditingComplete() {
-    FocusScope.of(context).requestFocus(_passwordFocusNode);
+    final newFocus = widget.emailValidator.isValid(_email)
+        ? _passwordFocusNode
+        : _emailFocusNode;
+    FocusScope.of(context).requestFocus(newFocus);
   }
 
   @override
@@ -79,7 +92,12 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   Widget _buildContent(BuildContext context) {
     bool submitEnabled = widget.emailValidator.isValid(_email) &&
-        widget.passwordValidator.isValid(_password);
+        widget.passwordValidator.isValid(_password) &&
+        !_isLoading;
+    bool showErrorTextOfEmail =
+        _submitted && !widget.emailValidator.isValid(_email);
+    bool showErrorTextOfPassword =
+        _submitted && !widget.passwordValidator.isValid(_password);
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -124,6 +142,9 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           CustomTextField(
             hintText: "Email",
+            errorText:
+                showErrorTextOfEmail ? widget.invalidEmailErrorText : null,
+            enabled: _isLoading == false,
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             focusNode: _emailFocusNode,
@@ -132,6 +153,10 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           CustomTextField(
             hintText: "Password",
+            errorText: showErrorTextOfPassword
+                ? widget.invalidPasswordErrorText
+                : null,
+            enabled: _isLoading == false,
             controller: _passwordController,
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
@@ -161,7 +186,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             height: 40.0,
           ),
           FlatButton(
-            onPressed: () => _forgotYourPassWord(context),
+            onPressed: () => !_isLoading ? _forgotYourPassWord(context) : null,
             child: Text(
               "Forgot your password?",
               textAlign: TextAlign.center,
@@ -179,7 +204,6 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 
   void _updateState() {
-    print('email: $_email, password: $_password');
     setState(() {});
   }
 }

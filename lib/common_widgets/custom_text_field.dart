@@ -4,6 +4,8 @@ import 'package:project_julia_ai/values/values.dart';
 class CustomTextField extends StatelessWidget {
   CustomTextField({
     this.hintText,
+    this.errorText,
+    this.enabled,
     this.obscureText: false,
     this.controller,
     this.keyboardType,
@@ -13,6 +15,8 @@ class CustomTextField extends StatelessWidget {
   });
 
   final String hintText;
+  final String errorText;
+  final bool enabled;
   final bool obscureText;
   final TextEditingController controller;
   final TextInputType keyboardType;
@@ -40,6 +44,8 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscureText,
           decoration: InputDecoration(
             hintText: hintText,
+            errorText: errorText,
+            enabled: enabled,
             hintStyle: TextStyle(
               color: AppColors.primaryText,
             ),

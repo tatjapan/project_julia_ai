@@ -24,18 +24,30 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
 //  String get _username => _userNameController.text;
+  bool _submitted = false;
+  bool _isLoading = false;
 
   void _submit() async {
+    setState(() {
+      _submitted = true;
+    });
     try {
       await widget.auth.createUserWithEmailAndPassword(_email, _password);
       Navigator.of(context).pop();
     } catch (e) {
       print(e.toString());
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   void _emailEditingComplete() {
-    FocusScope.of(context).requestFocus(_passwordFocusNode);
+    final newFocus = widget.emailValidator.isValid(_email)
+        ? _passwordFocusNode
+        : _emailFocusNode;
+    FocusScope.of(context).requestFocus(newFocus);
   }
 
   @override
@@ -69,7 +81,12 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
   Widget _buildContent() {
     bool submitEnabled = widget.emailValidator.isValid(_email) &&
-        widget.passwordValidator.isValid(_password);
+        widget.passwordValidator.isValid(_password) &&
+        !_isLoading;
+    bool showErrorTextOfEmail =
+        _submitted && !widget.emailValidator.isValid(_email);
+    bool showErrorTextOfPassword =
+        _submitted && !widget.passwordValidator.isValid(_password);
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -97,10 +114,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           CustomTextField(
 //            controller: _userNameController,
             hintText: "Username",
+            enabled: _isLoading == false,
           ),
           CustomTextField(
             controller: _emailController,
             hintText: "Email",
+            errorText:
+                showErrorTextOfEmail ? widget.invalidEmailErrorText : null,
+            enabled: _isLoading == false,
             keyboardType: TextInputType.emailAddress,
             focusNode: _emailFocusNode,
             onEditingComplete: _emailEditingComplete,
@@ -109,6 +130,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           CustomTextField(
             controller: _passwordController,
             hintText: "Password",
+            errorText: showErrorTextOfPassword
+                ? widget.invalidPasswordErrorText
+                : null,
+            enabled: _isLoading == false,
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             focusNode: _passwordFocusNode,
@@ -155,7 +180,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   }
 
   void _updateState() {
-    print('email: $_email, password: $_password');
     setState(() {});
   }
 }
