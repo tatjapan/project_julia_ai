@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
+import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 
@@ -35,11 +38,17 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       await widget.auth.createUserWithEmailAndPassword(_email, _password);
       Navigator.of(context).pop();
     } catch (e) {
-      print(e.toString());
+      PlatformAlertDialog(
+        title: "Sign up failed.",
+        content: e.toString(),
+        defaultActionText: "OK",
+      ).show(context);
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(
+        () {
+          _isLoading = false;
+        },
+      );
     }
   }
 
