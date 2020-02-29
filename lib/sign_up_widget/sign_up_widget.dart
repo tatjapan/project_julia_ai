@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
+import 'package:project_julia_ai/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +31,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   bool _submitted = false;
   bool _isLoading = false;
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
   void _submit() async {
     setState(() {
       _submitted = true;
@@ -37,11 +48,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.createUserWithEmailAndPassword(_email, _password);
       Navigator.of(context).pop();
-    } catch (e) {
-      PlatformAlertDialog(
+    } on PlatformException catch (e) {
+      PlatformExceptionAlertDialog(
         title: "Sign up failed.",
-        content: e.toString(),
-        defaultActionText: "OK",
+        exception: e,
       ).show(context);
     } finally {
       setState(

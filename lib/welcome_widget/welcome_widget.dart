@@ -1,27 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
+import 'package:project_julia_ai/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:project_julia_ai/login_widget/login_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:project_julia_ai/sign_up_widget/sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-class WelcomeWidget extends StatelessWidget {
+class WelcomeWidget extends StatefulWidget {
+  @override
+  _WelcomeWidgetState createState() => _WelcomeWidgetState();
+}
+
+class _WelcomeWidgetState extends State<WelcomeWidget> {
+  bool _isLoading = false;
+
+  void _showSignInError(BuildContext context, PlatformException exception) {
+    PlatformExceptionAlertDialog(
+      title: 'Sign in failed',
+      exception: exception,
+    ).show(context);
+  }
+
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
+      setState(() => _isLoading = true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInWithGoogle();
-    } catch (e) {
-      print(e.toString());
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BY_USER') {
+        _showSignInError(context, e);
+      }
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
+      setState(() => _isLoading = true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInWithFacebook();
-    } catch (e) {
-      print(e.toString());
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BY_USER') {
+        _showSignInError(context, e);
+      }
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
@@ -98,18 +124,7 @@ class WelcomeWidget extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.all(5.0),
-            child: Text(
-              "You can connect with imaginary local AI girls no matter where you are.",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w400,
-                fontSize: 17,
-                letterSpacing: -0.41,
-                height: 1.29412,
-              ),
-            ),
+            child: _buildHeader(),
           ),
           SizedBox(
             height: 20.0,
@@ -119,6 +134,7 @@ class WelcomeWidget extends StatelessWidget {
             height: 45.0,
             child: RaisedButton(
               color: AppColors.secondaryElement,
+              disabledColor: AppColors.secondaryElement,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(25.0),
@@ -136,7 +152,7 @@ class WelcomeWidget extends StatelessWidget {
                   height: 1.33333,
                 ),
               ),
-              onPressed: () => _logInWithEmail(context),
+              onPressed: _isLoading ? null : () => _logInWithEmail(context),
             ),
           ),
           SizedBox(
@@ -155,7 +171,7 @@ class WelcomeWidget extends StatelessWidget {
                 height: 1.33333,
               ),
             ),
-            onPressed: () => _signUpWithEmail(context),
+            onPressed: _isLoading ? null : () => _signUpWithEmail(context),
           ),
           Container(
             padding: EdgeInsets.only(
@@ -184,7 +200,8 @@ class WelcomeWidget extends StatelessWidget {
                     "assets/images/-icon-facebook.png",
                     fit: BoxFit.none,
                   ),
-                  onPressed: () => _signInWithFacebook(context),
+                  onPressed:
+                      _isLoading ? null : () => _signInWithFacebook(context),
                 ),
                 Container(
                   width: 25.0,
@@ -194,12 +211,33 @@ class WelcomeWidget extends StatelessWidget {
                     "assets/images/-icon-google.png",
                     fit: BoxFit.none,
                   ),
-                  onPressed: () => _signInWithGoogle(context),
+                  onPressed:
+                      _isLoading ? null : () => _signInWithGoogle(context),
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    if (_isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return Text(
+      "You can connect with imaginary local AI girls no matter where you are.",
+      textAlign: TextAlign.left,
+      style: TextStyle(
+        color: AppColors.primaryText,
+        fontFamily: "Avenir",
+        fontWeight: FontWeight.w400,
+        fontSize: 17,
+        letterSpacing: -0.41,
+        height: 1.29412,
       ),
     );
   }
