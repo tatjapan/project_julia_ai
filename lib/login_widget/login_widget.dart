@@ -8,13 +8,11 @@ import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
 import 'package:project_julia_ai/forgot_password_widget/forgot_password_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
+import 'package:provider/provider.dart';
 
 import '../validator.dart';
 
 class LoginWidget extends StatefulWidget with EmailAndPasswordValidators {
-  LoginWidget({@required this.auth});
-  final AuthBase auth;
-
   @override
   _LoginWidgetState createState() => _LoginWidgetState();
 }
@@ -37,7 +35,8 @@ class _LoginWidgetState extends State<LoginWidget> {
       _isLoading = true;
     });
     try {
-      await widget.auth.signInWithEmailAndPassword(_email, _password);
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.signInWithEmailAndPassword(_email, _password);
       Navigator.of(context).pop();
     } catch (e) {
       PlatformAlertDialog(

@@ -5,14 +5,12 @@ import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 import 'package:project_julia_ai/values/my_flutter_app_icons.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
-  Home({@required this.auth});
-
-  final AuthBase auth;
-
-  Future<void> _signOut() async {
+  Future<void> _signOut(BuildContext context) async {
     try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signOut();
     } catch (e) {
       print(e.toString());
@@ -27,7 +25,7 @@ class Home extends StatelessWidget {
       defaultActionText: "Logout",
     ).show(context);
     if (didRequestSignOut == true) {
-      _signOut();
+      _signOut(context);
     }
   }
 

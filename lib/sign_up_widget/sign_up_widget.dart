@@ -7,12 +7,11 @@ import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
+import 'package:provider/provider.dart';
 
 import '../validator.dart';
 
 class SignUpWidget extends StatefulWidget with EmailAndPasswordValidators {
-  SignUpWidget({@required this.auth});
-  final AuthBase auth;
   @override
   _SignUpWidgetState createState() => _SignUpWidgetState();
 }
@@ -35,7 +34,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       _submitted = true;
     });
     try {
-      await widget.auth.createUserWithEmailAndPassword(_email, _password);
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.createUserWithEmailAndPassword(_email, _password);
       Navigator.of(context).pop();
     } catch (e) {
       PlatformAlertDialog(

@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/login_widget/login_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
+import 'package:provider/provider.dart';
 import 'package:project_julia_ai/sign_up_widget/sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
 class WelcomeWidget extends StatelessWidget {
-  WelcomeWidget({@required this.auth});
-  final AuthBase auth;
-
-  Future<void> _signInWithGoogle() async {
+  Future<void> _signInWithGoogle(BuildContext context) async {
     try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInWithGoogle();
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Future<void> _signInWithFacebook() async {
+  Future<void> _signInWithFacebook(BuildContext context) async {
     try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInWithFacebook();
     } catch (e) {
       print(e.toString());
@@ -29,7 +29,7 @@ class WelcomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => SignUpWidget(auth: auth),
+        builder: (context) => SignUpWidget(),
       ),
     );
   }
@@ -38,7 +38,7 @@ class WelcomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => LoginWidget(auth: auth),
+        builder: (context) => LoginWidget(),
       ),
     );
   }
@@ -184,7 +184,7 @@ class WelcomeWidget extends StatelessWidget {
                     "assets/images/-icon-facebook.png",
                     fit: BoxFit.none,
                   ),
-                  onPressed: _signInWithFacebook,
+                  onPressed: () => _signInWithFacebook(context),
                 ),
                 Container(
                   width: 25.0,
@@ -194,7 +194,7 @@ class WelcomeWidget extends StatelessWidget {
                     "assets/images/-icon-google.png",
                     fit: BoxFit.none,
                   ),
-                  onPressed: _signInWithGoogle,
+                  onPressed: () => _signInWithGoogle(context),
                 ),
               ],
             ),
