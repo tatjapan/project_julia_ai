@@ -7,27 +7,27 @@ import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
 import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
 import 'package:project_julia_ai/common_widgets/platform_exception_alert_dialog.dart';
+import 'package:project_julia_ai/sign_in//forgot_password_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 import 'package:provider/provider.dart';
 
-import '../validator.dart';
+import 'validator.dart';
 
-class SignUpWidget extends StatefulWidget with EmailAndPasswordValidators {
+class LoginWidget extends StatefulWidget with EmailAndPasswordValidators {
   @override
-  _SignUpWidgetState createState() => _SignUpWidgetState();
+  _LoginWidgetState createState() => _LoginWidgetState();
 }
 
-class _SignUpWidgetState extends State<SignUpWidget> {
-//  final TextEditingController _userNameController = TextEditingController();
+class _LoginWidgetState extends State<LoginWidget> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
-//  String get _username => _userNameController.text;
   bool _submitted = false;
   bool _isLoading = false;
 
@@ -40,25 +40,24 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     super.dispose();
   }
 
-  void _submit() async {
+  Future<void> _submit() async {
     setState(() {
       _submitted = true;
+      _isLoading = true;
     });
     try {
       final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth.createUserWithEmailAndPassword(_email, _password);
+      await auth.signInWithEmailAndPassword(_email, _password);
       Navigator.of(context).pop();
     } on PlatformException catch (e) {
       PlatformExceptionAlertDialog(
-        title: "Sign up failed.",
+        title: "Log in failed.",
         exception: e,
       ).show(context);
     } finally {
-      setState(
-        () {
-          _isLoading = false;
-        },
-      );
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -78,7 +77,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           width: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/background-signup.png"),
+              image: AssetImage("assets/images/background-login.png"),
               fit: BoxFit.cover,
             ),
           ),
@@ -92,13 +91,22 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          body: _buildContent(),
+          body: _buildContent(context),
         ),
       ],
     );
   }
 
-  Widget _buildContent() {
+  void _forgotYourPassWord(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => ForgotPasswordWidget(),
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
     bool submitEnabled = widget.emailValidator.isValid(_email) &&
         widget.passwordValidator.isValid(_password) &&
         !_isLoading;
@@ -115,44 +123,57 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           Container(
             padding: EdgeInsets.all(10.0),
             child: Text(
-              "Create an account",
-              textAlign: TextAlign.center,
+              "Welcome back",
+              textAlign: TextAlign.left,
               style: TextStyle(
                 color: AppColors.primaryText,
-                fontFamily: "Avenir_heavy",
-                fontWeight: FontWeight.w400,
+                fontFamily: "Avenir",
+                fontWeight: FontWeight.w900,
                 fontSize: 34,
                 letterSpacing: 0.60714,
                 height: 1.17647,
               ),
             ),
           ),
+          Container(
+            padding: EdgeInsets.only(
+              left: 10.0,
+              right: 10.0,
+            ),
+            child: Text(
+              "Login to your account",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontFamily: "Avenir",
+                fontWeight: FontWeight.w400,
+                fontSize: 18,
+                letterSpacing: -0.41,
+                height: 1.29412,
+              ),
+            ),
+          ),
           SizedBox(
-            height: 40.0,
+            height: 30.0,
           ),
           CustomTextField(
-//            controller: _userNameController,
-            hintText: "Username",
-            enabled: _isLoading == false,
-          ),
-          CustomTextField(
-            controller: _emailController,
             hintText: "Email",
             errorText:
                 showErrorTextOfEmail ? widget.invalidEmailErrorText : null,
             enabled: _isLoading == false,
+            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             focusNode: _emailFocusNode,
             onEditingComplete: _emailEditingComplete,
             onChanged: (email) => _updateState(),
           ),
           CustomTextField(
-            controller: _passwordController,
             hintText: "Password",
             errorText: showErrorTextOfPassword
                 ? widget.invalidPasswordErrorText
                 : null,
             enabled: _isLoading == false,
+            controller: _passwordController,
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             focusNode: _passwordFocusNode,
@@ -160,27 +181,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             onChanged: (password) => _updateState(),
           ),
           SizedBox(
-            height: 10.0,
-          ),
-          Container(
-            padding: EdgeInsets.all(30.0),
-            width: 275.0,
-            child: Text(
-              "By clicking Sign up you agree to the following Terms and Conditions without reservation. ",
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w300,
-                fontSize: 18,
-                letterSpacing: -0.41,
-                height: 1.29412,
-              ),
-            ),
+            height: 25.0,
           ),
           CustomGradientButton(
             child: Text(
-              "Sign Up",
+              "Log In",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.primaryText,
@@ -192,6 +197,22 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               ),
             ),
             onPressed: submitEnabled ? _submit : null,
+          ),
+          SizedBox(
+            height: 40.0,
+          ),
+          FlatButton(
+            onPressed: () => !_isLoading ? _forgotYourPassWord(context) : null,
+            child: Text(
+              "Forgot your password?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontFamily: "Avenir",
+                fontWeight: FontWeight.w400,
+                fontSize: 18,
+              ),
+            ),
           ),
         ],
       ),

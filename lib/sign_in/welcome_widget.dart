@@ -2,19 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/platform_exception_alert_dialog.dart';
-import 'package:project_julia_ai/login_widget/login_widget.dart';
+import 'package:project_julia_ai/sign_in//login_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
+import 'package:project_julia_ai/sign_in/login_widget_bloc_base.dart';
+import 'package:project_julia_ai/sign_in/sign_in_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:project_julia_ai/sign_up_widget/sign_up_widget.dart';
+import 'package:project_julia_ai/sign_in//sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
-class WelcomeWidget extends StatefulWidget {
-  @override
-  _WelcomeWidgetState createState() => _WelcomeWidgetState();
-}
+class WelcomeWidget extends StatelessWidget {
+  const WelcomeWidget({Key key, @required this.bloc}) : super(key: key);
+  final SignInBloc bloc;
 
-class _WelcomeWidgetState extends State<WelcomeWidget> {
-  bool _isLoading = false;
+  static Widget create(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    return Provider<SignInBloc>(
+      create: (_) => SignInBloc(auth: auth),
+      dispose: (context, bloc) => bloc.dispose(),
+      child: Consumer<SignInBloc>(
+        builder: (context, bloc, _) => WelcomeWidget(
+          bloc: bloc,
+        ),
+      ),
+    );
+  }
 
   void _showSignInError(BuildContext context, PlatformException exception) {
     PlatformExceptionAlertDialog(
@@ -25,29 +36,21 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      setState(() => _isLoading = true);
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth.signInWithGoogle();
+      await bloc.signInWithGoogle();
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
       }
-    } finally {
-      setState(() => _isLoading = false);
     }
   }
 
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
-      setState(() => _isLoading = true);
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth.signInWithFacebook();
+      await bloc.signInWithFacebook();
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
       }
-    } finally {
-      setState(() => _isLoading = false);
     }
   }
 
@@ -64,7 +67,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => LoginWidget(),
+        builder: (context) => LoginWidgetBlocBase.create(context),
       ),
     );
   }
@@ -85,13 +88,18 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          body: _buildContent(context),
+          body: StreamBuilder<bool>(
+              stream: bloc.isLoadingStream,
+              initialData: false,
+              builder: (context, snapshot) {
+                return _buildContent(context, snapshot.data);
+              }),
         ),
       ],
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context, bool isLoading) {
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -124,7 +132,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           ),
           Container(
             padding: EdgeInsets.all(5.0),
-            child: _buildHeader(),
+            child: _buildHeader(isLoading),
           ),
           SizedBox(
             height: 20.0,
@@ -152,7 +160,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   height: 1.33333,
                 ),
               ),
-              onPressed: _isLoading ? null : () => _logInWithEmail(context),
+              onPressed: isLoading ? null : () => _logInWithEmail(context),
             ),
           ),
           SizedBox(
@@ -171,7 +179,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                 height: 1.33333,
               ),
             ),
-            onPressed: _isLoading ? null : () => _signUpWithEmail(context),
+            onPressed: isLoading ? null : () => _signUpWithEmail(context),
           ),
           Container(
             padding: EdgeInsets.only(
@@ -201,7 +209,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     fit: BoxFit.none,
                   ),
                   onPressed:
-                      _isLoading ? null : () => _signInWithFacebook(context),
+                      isLoading ? null : () => _signInWithFacebook(context),
                 ),
                 Container(
                   width: 25.0,
@@ -212,7 +220,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     fit: BoxFit.none,
                   ),
                   onPressed:
-                      _isLoading ? null : () => _signInWithGoogle(context),
+                      isLoading ? null : () => _signInWithGoogle(context),
                 ),
               ],
             ),
@@ -222,8 +230,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     );
   }
 
-  Widget _buildHeader() {
-    if (_isLoading) {
+  Widget _buildHeader(bool isLoading) {
+    if (isLoading) {
       return Center(
         child: CircularProgressIndicator(),
       );
