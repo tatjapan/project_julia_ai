@@ -21,6 +21,7 @@ dependencies:
   # Facebook Login v 3.0.0 doesn't work on iOS.
   cupertino_icons: ^0.1.2
   firebase_auth: ^0.15.4
+  cloud_firestore: ^0.13.4
   google_sign_in: ^4.1.1
   flutter_facebook_login: ^2.0.1
   provider: ^4.0.4

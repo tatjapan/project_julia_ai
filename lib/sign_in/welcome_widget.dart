@@ -6,6 +6,7 @@ import 'package:project_julia_ai/sign_in//login_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/sign_in/login_widget_bloc_base.dart';
 import 'package:project_julia_ai/sign_in/sign_in_bloc.dart';
+import 'package:project_julia_ai/sign_in/sign_up_widget_bloc_base.dart';
 import 'package:provider/provider.dart';
 import 'package:project_julia_ai/sign_in//sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
@@ -58,7 +59,7 @@ class WelcomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => SignUpWidget(),
+        builder: (context) => SignUpWidgetBlocBase.create(context),
       ),
     );
   }

@@ -19,7 +19,7 @@ class EmailCreateAccountBloc {
   Future<void> submit() async {
     updateWith(submitted: true, isLoading: false);
     try {
-      await auth.signInWithEmailAndPassword(_model.email, _model.password);
+      await auth.createUserWithEmailAndPassword(_model.email, _model.password);
     } catch (e) {
       updateWith(isLoading: false);
       rethrow;

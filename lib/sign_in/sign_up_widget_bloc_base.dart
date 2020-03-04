@@ -5,19 +5,17 @@ import 'package:flutter/services.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/custom_sign_in_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/custom_text_field.dart';
-import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
 import 'package:project_julia_ai/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:project_julia_ai/model/email_sign_in_model.dart';
-import 'package:project_julia_ai/sign_in//forgot_password_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
-import 'package:project_julia_ai/sign_in/email_sign_in_bloc.dart';
+import 'package:project_julia_ai/sign_in/email_create_account_bloc.dart';
 import 'package:project_julia_ai/values/values.dart';
 import 'package:provider/provider.dart';
 
 import 'validator.dart';
 
-class LoginWidgetBlocBase extends StatefulWidget {
-  LoginWidgetBlocBase({@required this.bloc});
+class SignUpWidgetBlocBase extends StatefulWidget {
+  SignUpWidgetBlocBase({@required this.bloc});
   final EmailCreateAccountBloc bloc;
 
   static Widget create(BuildContext context) {
@@ -25,17 +23,18 @@ class LoginWidgetBlocBase extends StatefulWidget {
     return Provider<EmailCreateAccountBloc>(
       create: (context) => EmailCreateAccountBloc(auth: auth),
       child: Consumer<EmailCreateAccountBloc>(
-        builder: (context, bloc, _) => LoginWidgetBlocBase(bloc: bloc),
+        builder: (context, bloc, _) => SignUpWidgetBlocBase(bloc: bloc),
       ),
       dispose: (context, bloc) => bloc.dispose(),
     );
   }
 
   @override
-  _LoginWidgetBlocBaseState createState() => _LoginWidgetBlocBaseState();
+  _SignUpWidgetBlocBaseState createState() => _SignUpWidgetBlocBaseState();
 }
 
-class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
+class _SignUpWidgetBlocBaseState extends State<SignUpWidgetBlocBase> {
+//  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -57,7 +56,7 @@ class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
       Navigator.of(context).pop();
     } on PlatformException catch (e) {
       PlatformExceptionAlertDialog(
-        title: "Log in failed.",
+        title: "Sign up failed.",
         exception: e,
       ).show(context);
     }
@@ -84,7 +83,7 @@ class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/background-login.png"),
+                    image: AssetImage("assets/images/background-signup.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -105,15 +104,6 @@ class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
         });
   }
 
-  void _forgotYourPassWord(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        fullscreenDialog: true,
-        builder: (context) => ForgotPasswordWidget(),
-      ),
-    );
-  }
-
   Widget _buildContent(EmailSignInModel model) {
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
@@ -124,54 +114,41 @@ class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
           Container(
             padding: EdgeInsets.all(10.0),
             child: Text(
-              "Welcome back",
-              textAlign: TextAlign.left,
+              "Create an account",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w900,
+                fontFamily: "Avenir_heavy",
+                fontWeight: FontWeight.w400,
                 fontSize: 34,
                 letterSpacing: 0.60714,
                 height: 1.17647,
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(
-              left: 10.0,
-              right: 10.0,
-            ),
-            child: Text(
-              "Login to your account",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w400,
-                fontSize: 18,
-                letterSpacing: -0.41,
-                height: 1.29412,
-              ),
-            ),
-          ),
           SizedBox(
-            height: 30.0,
+            height: 40.0,
           ),
           CustomTextField(
+//            controller: _userNameController,
+            hintText: "Username",
+            enabled: model.isLoading == false,
+          ),
+          CustomTextField(
+            controller: _emailController,
             hintText: "Email",
             errorText: model.emailErrorText,
             enabled: model.isLoading == false,
-            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             focusNode: _emailFocusNode,
             onEditingComplete: () => _emailEditingComplete(model),
             onChanged: widget.bloc.updateEmail,
           ),
           CustomTextField(
+            controller: _passwordController,
             hintText: "Password",
             errorText: model.passwordErrorText,
             enabled: model.isLoading == false,
-            controller: _passwordController,
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             focusNode: _passwordFocusNode,
@@ -179,11 +156,27 @@ class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
             onChanged: widget.bloc.updatePassword,
           ),
           SizedBox(
-            height: 25.0,
+            height: 10.0,
+          ),
+          Container(
+            padding: EdgeInsets.all(30.0),
+            width: 275.0,
+            child: Text(
+              "By clicking Sign up you agree to the following Terms and Conditions without reservation. ",
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontFamily: "Avenir",
+                fontWeight: FontWeight.w300,
+                fontSize: 18,
+                letterSpacing: -0.41,
+                height: 1.29412,
+              ),
+            ),
           ),
           CustomGradientButton(
             child: Text(
-              "Log In",
+              "Sign Up",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.primaryText,
@@ -195,23 +188,6 @@ class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
               ),
             ),
             onPressed: model.canSubmit ? _submit : null,
-          ),
-          SizedBox(
-            height: 40.0,
-          ),
-          FlatButton(
-            onPressed: () =>
-                !model.isLoading ? _forgotYourPassWord(context) : null,
-            child: Text(
-              "Forgot your password?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w400,
-                fontSize: 18,
-              ),
-            ),
           ),
         ],
       ),
