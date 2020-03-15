@@ -128,8 +128,8 @@ class _LoginWidgetBlocBaseState extends State<LoginWidgetBlocBase> {
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w900,
+                fontFamily: "Avenir Next LT Pro",
+                fontWeight: FontWeight.w800,
                 fontSize: 34,
                 letterSpacing: 0.60714,
                 height: 1.17647,

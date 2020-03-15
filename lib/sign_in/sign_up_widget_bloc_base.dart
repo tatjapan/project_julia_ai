@@ -118,8 +118,8 @@ class _SignUpWidgetBlocBaseState extends State<SignUpWidgetBlocBase> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.primaryText,
-                fontFamily: "Avenir_heavy",
-                fontWeight: FontWeight.w400,
+                fontFamily: "Avenir Next LT Pro",
+                fontWeight: FontWeight.w800,
                 fontSize: 34,
                 letterSpacing: 0.60714,
                 height: 1.17647,

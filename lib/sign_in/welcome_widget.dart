@@ -120,8 +120,8 @@ class WelcomeWidget extends StatelessWidget {
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w900,
+                fontFamily: "Avenir Next LT Pro",
+                fontWeight: FontWeight.w800,
                 fontSize: 44,
                 letterSpacing: -0.704,
                 height: 1.13636,

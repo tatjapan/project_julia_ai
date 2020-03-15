@@ -51,8 +51,8 @@ class ForgotPasswordWidget extends StatelessWidget {
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: AppColors.primaryText,
-                fontFamily: "Avenir",
-                fontWeight: FontWeight.w900,
+                fontFamily: "Avenir Next LT Pro",
+                fontWeight: FontWeight.w800,
                 fontSize: 34,
                 letterSpacing: -2.0,
                 height: 1.17647,
