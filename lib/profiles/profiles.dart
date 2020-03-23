@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_julia_ai/common_widgets/custom_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
@@ -6,7 +5,7 @@ import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/values/values.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Profiles extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthBase>(context, listen: false);
