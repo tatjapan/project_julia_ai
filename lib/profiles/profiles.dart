@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_julia_ai/common_widgets/avatar.dart';
 import 'package:project_julia_ai/common_widgets/custom_app_bar.dart';
 import 'package:project_julia_ai/common_widgets/platform_alert_dialog.dart';
 import 'package:project_julia_ai/services/auth.dart';
@@ -29,17 +30,38 @@ class Profiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return Scaffold(
       backgroundColor: AppColors.secondaryBackground,
       appBar: CustomAppBar(
         icon: Icon(Icons.settings),
         onPressed: () => _confirmSignOut(context),
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: 30.0,
+      body: Container(
+        child: PreferredSize(
+          child: _buildUserInfo(user),
+          preferredSize: Size.fromHeight(300),
         ),
       ),
+    );
+  }
+
+  Widget _buildUserInfo(User user) {
+    return Column(
+      children: <Widget>[
+        Avatar(
+          photoUrl: user.photoUrl,
+          radius: 100,
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        if (user.displayName != null)
+          Text(
+            user.displayName,
+            style: TextStyle(color: AppColors.primaryText),
+          ),
+      ],
     );
   }
 }

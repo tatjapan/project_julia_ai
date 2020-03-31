@@ -18,9 +18,12 @@ class SignInStateControllPage extends StatelessWidget {
             if (user == null) {
               return WelcomeWidget.create(context);
             }
-            return Provider<Database>(
-              create: (_) => FirestoreDatabase(uid: user.uid),
-              child: TabStateControllPage(),
+            return Provider<User>.value(
+              value: user,
+              child: Provider<Database>(
+                create: (_) => FirestoreDatabase(uid: user.uid),
+                child: TabStateControllPage(),
+              ),
             );
           } else {
             return Scaffold(
