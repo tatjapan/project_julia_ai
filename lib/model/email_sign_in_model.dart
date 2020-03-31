@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:project_julia_ai/sign_in/validator.dart';
 
 class EmailSignInModel with EmailAndPasswordValidators {
@@ -42,5 +43,22 @@ class EmailSignInModel with EmailAndPasswordValidators {
       submitted: submitted ?? this.submitted,
     );
   }
-  // model.copyWith(email: email)
+
+  @override
+  int get hashCode => hashValues(email, password, isLoading, submitted);
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) return true;
+    if (runtimeType != other.runtimeType) return false;
+    final EmailSignInModel otherModel = other;
+    return email == otherModel.email &&
+        password == otherModel.password &&
+        isLoading == otherModel.isLoading &&
+        submitted == otherModel.submitted;
+  }
+
+  @override
+  String toString() =>
+      'email: $email, password: $password, isLoading: $isLoading, submitted: $submitted';
 }

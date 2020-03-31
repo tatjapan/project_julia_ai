@@ -3,6 +3,7 @@ import 'package:project_julia_ai/values/values.dart';
 
 class CustomTextField extends StatelessWidget {
   CustomTextField({
+    this.key,
     this.hintText,
     this.errorText,
     this.enabled,
@@ -12,8 +13,9 @@ class CustomTextField extends StatelessWidget {
     this.focusNode,
     this.onEditingComplete,
     this.onChanged,
-  });
+  }) : super(key: key);
 
+  final Key key;
   final String hintText;
   final String errorText;
   final bool enabled;

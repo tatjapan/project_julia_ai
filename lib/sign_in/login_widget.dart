@@ -157,6 +157,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             height: 30.0,
           ),
           CustomTextField(
+            key: Key('email'),
             hintText: "Email",
             errorText:
                 showErrorTextOfEmail ? widget.invalidEmailErrorText : null,
@@ -168,6 +169,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             onChanged: (email) => _updateState(),
           ),
           CustomTextField(
+            key: Key('password'),
             hintText: "Password",
             errorText: showErrorTextOfPassword
                 ? widget.invalidPasswordErrorText
