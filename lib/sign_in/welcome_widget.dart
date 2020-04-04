@@ -2,27 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_julia_ai/common_widgets/custom_gradient_button.dart';
 import 'package:project_julia_ai/common_widgets/platform_exception_alert_dialog.dart';
-import 'package:project_julia_ai/sign_in//login_widget.dart';
 import 'package:project_julia_ai/services/auth.dart';
-import 'package:project_julia_ai/sign_in/login_widget_bloc_base.dart';
-import 'package:project_julia_ai/sign_in/sign_in_bloc.dart';
-import 'package:project_julia_ai/sign_in/sign_up_widget_bloc_base.dart';
+import 'package:project_julia_ai/sign_in/login_widget_change_notifier.dart';
+import 'package:project_julia_ai/sign_in/sign_in_manager.dart';
+import 'package:project_julia_ai/sign_in/sign_up_widget_change_notifier.dart';
 import 'package:provider/provider.dart';
-import 'package:project_julia_ai/sign_in//sign_up_widget.dart';
 import 'package:project_julia_ai/values/values.dart';
 
 class WelcomeWidget extends StatelessWidget {
-  const WelcomeWidget({Key key, @required this.bloc}) : super(key: key);
-  final SignInBloc bloc;
+  const WelcomeWidget({
+    Key key,
+    @required this.manager,
+    @required this.isLoading,
+  }) : super(key: key);
+  final SignInManager manager;
+  final bool isLoading;
 
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
-    return Provider<SignInBloc>(
-      create: (_) => SignInBloc(auth: auth),
-      dispose: (context, bloc) => bloc.dispose(),
-      child: Consumer<SignInBloc>(
-        builder: (context, bloc, _) => WelcomeWidget(
-          bloc: bloc,
+    return ChangeNotifierProvider<ValueNotifier<bool>>(
+      create: (_) => ValueNotifier<bool>(false),
+      child: Consumer<ValueNotifier<bool>>(
+        builder: (_, isLoading, __) => Provider<SignInManager>(
+          create: (_) => SignInManager(auth: auth, isLoading: isLoading),
+          child: Consumer<SignInManager>(
+            builder: (context, manager, _) => WelcomeWidget(
+              manager: manager,
+              isLoading: isLoading.value,
+            ),
+          ),
         ),
       ),
     );
@@ -37,7 +45,7 @@ class WelcomeWidget extends StatelessWidget {
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      await bloc.signInWithGoogle();
+      await manager.signInWithGoogle();
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
@@ -47,7 +55,7 @@ class WelcomeWidget extends StatelessWidget {
 
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
-      await bloc.signInWithFacebook();
+      await manager.signInWithFacebook();
     } on PlatformException catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
@@ -59,7 +67,7 @@ class WelcomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => SignUpWidgetBlocBase.create(context),
+        builder: (context) => SignUpWidgetChangeNotifier.create(context),
       ),
     );
   }
@@ -68,7 +76,7 @@ class WelcomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => LoginWidgetBlocBase.create(context),
+        builder: (context) => LoginWidgetChangeNotifier.create(context),
       ),
     );
   }
@@ -89,18 +97,13 @@ class WelcomeWidget extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          body: StreamBuilder<bool>(
-              stream: bloc.isLoadingStream,
-              initialData: false,
-              builder: (context, snapshot) {
-                return _buildContent(context, snapshot.data);
-              }),
+          body: _buildContent(context),
         ),
       ],
     );
   }
 
-  Widget _buildContent(BuildContext context, bool isLoading) {
+  Widget _buildContent(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -133,7 +136,7 @@ class WelcomeWidget extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.all(5.0),
-            child: _buildHeader(isLoading),
+            child: _buildHeader(),
           ),
           SizedBox(
             height: 20.0,
@@ -231,7 +234,7 @@ class WelcomeWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(bool isLoading) {
+  Widget _buildHeader() {
     if (isLoading) {
       return Center(
         child: CircularProgressIndicator(),

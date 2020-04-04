@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_julia_ai/home/home.dart';
 import 'package:project_julia_ai/home/tab_state_controll_page.dart';
 import 'package:project_julia_ai/services/auth.dart';
 import 'package:project_julia_ai/services/database.dart';
