@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_julia_ai/common_widgets/linear_gradient_mask.dart';
 import 'package:project_julia_ai/home/tab_item.dart';
 import 'package:project_julia_ai/values/values.dart';
 
@@ -22,7 +23,7 @@ class CupertinoHomeScaffold extends StatelessWidget {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         backgroundColor: AppColors.primaryBackground,
-        iconSize: 30.0,
+        iconSize: 35.0,
         items: [
           _buildItem(TabItem.home),
           _buildItem(TabItem.messages),
@@ -44,18 +45,32 @@ class CupertinoHomeScaffold extends StatelessWidget {
   BottomNavigationBarItem _buildItem(TabItem tabItem) {
     final itemData = TabItemData.allTabs[tabItem];
     final color = currentTab == tabItem
-        ? AppColors.primaryElement
-        : AppColors.secondaryElement;
+        ? AppColors.primaryText
+        : AppColors.primaryElement;
 
     return BottomNavigationBarItem(
-      icon: Icon(
-        itemData.icon,
-        color: color,
-      ),
-      title: Text(
-        itemData.title,
-        style: TextStyle(color: color),
-      ),
+      icon: currentTab == tabItem
+          ? LinearGradientMask(
+              child: Icon(
+                itemData.icon,
+                color: color,
+              ),
+            )
+          : Icon(
+              itemData.icon,
+              color: color,
+            ),
+      title: currentTab == tabItem
+          ? LinearGradientMask(
+              child: Text(
+                itemData.title,
+                style: TextStyle(color: color),
+              ),
+            )
+          : Text(
+              itemData.title,
+              style: TextStyle(color: color),
+            ),
     );
   }
 }
